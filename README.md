@@ -15,6 +15,7 @@
 ```
 vim /etc/selinux/conf
 设置SELINUX=DISABLED
+
 设置当前环境生效，执行
 setenforce 0
 ```
