@@ -40,9 +40,10 @@ sysctl --system
 swapoff -a
 
 vim /etc/fstab
-
-删除或注释掉/dev/mapper/centos-swap swap                    swap    defaults        0 0
+删除或注释掉
+/dev/mapper/centos-swap swap  swap  defaults  0 0
 
 检查swap状态
 cat /proc/swaps
 ```
+
