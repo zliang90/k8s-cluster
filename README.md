@@ -102,3 +102,19 @@ for image in $PWD/*; do docker load -i ${image} ; done
 ```
 
 由于国内墙的原因，gcr的镜像无法下载，采用此种方式导入镜像节省时间，本人将在docker hub上提供常用镜像，但下载之后需要使用docker tag为镜像制作适合的标签。
+
+## 安装kubernetes集群所需的相关组件
+
+- socat
+- kubernetes-cni
+- kubelet
+- kubectl
+- kubeadm
+
+切换至all_in_one中kuberpm路径顺序执行下列命令
+
+```bash
+rpm -ivh socat-1.7.3.2-2.el7.x86_64.rpm
+rpm -ivh kubernetes-cni-0.6.0-0.x86_64.rpm  kubelet-1.9.2-0.x86_64.rpm  kubectl-1.9.2-0.x86_64.rpm
+rpm -ivh kubeadm-1.9.2-0.x86_64.rpm
+```
