@@ -536,3 +536,9 @@ systemctl restart docker && systemctl restart kubelet
 
 ## 总结
 至此，基础集群搭建完毕，关于dashboard，heapster等监控相关的插件部署，之后进一步完善。
+
+## 参考
+
+[1] https://github.com/cookeem/kubeadm-ha
+
+[2] https://www.kubernetes.org.cn/3536.html
