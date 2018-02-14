@@ -117,4 +117,68 @@ for image in $PWD/*; do docker load -i ${image} ; done
 rpm -ivh socat-1.7.3.2-2.el7.x86_64.rpm
 rpm -ivh kubernetes-cni-0.6.0-0.x86_64.rpm  kubelet-1.9.2-0.x86_64.rpm  kubectl-1.9.2-0.x86_64.rpm
 rpm -ivh kubeadm-1.9.2-0.x86_64.rpm
+
+systemctl enable kubelet && systemctl start kubelet && systemctl status kubelet
+```
+
+## 安装keepalived
+
+`yum install -y keepalived`
+
+## 生成kubeadm及keepalived配置文件
+
+修改all_in_one/kubeconfig/create-config.sh相关参数
+
+```bash
+#!/bin/bash
+
+# 设置本机IP 
+export K8SHA_IPLOCAL=192.168.2.101
+
+# 设置本地etc节点名，选项： etcd1, etcd2, etcd3
+export K8SHA_ETCDNAME=etcd1
+
+# keepalived节点角色, options: MASTER, BACKUP. 
+export K8SHA_KA_STATE=MASTER
+
+# 配置keepalived节点优先级, 选项： 120, 110, 100. MASTER must 120
+export K8SHA_KA_PRIO=120
+
+# 设置keepalived网络接口名称
+export K8SHA_KA_INTF=ens32
+
+#######################################
+# all masters settings below must be same
+#######################################
+
+# 虚拟IP
+export K8SHA_IPVIRTUAL=192.168.2.100
+
+# 第一master节点IP
+export K8SHA_IP1=192.168.2.101
+
+# 第二master节点IP
+export K8SHA_IP2=192.168.2.102
+
+# 第三master节点IP
+export K8SHA_IP3=192.168.2.103
+
+# 第一master节点IP
+export K8SHA_HOSTNAME1=master01
+
+# 第二master节点IP
+export K8SHA_HOSTNAME2=master02
+
+# 第三master节点IP
+export K8SHA_HOSTNAME3=master03
+
+# keepalived 认证字符串
+export K8SHA_KA_AUTH=4cdf7dc3b4c90194d1600c483e10ad1d
+
+# kubernetes集群Token，可使用 'kubeadm token generate'创建
+export K8SHA_TOKEN=7f276c.0741d82a5337f526
+
+# kubernetes CIDR POD网络
+export K8SHA_CIDR=10.244.0.0\\/16
+
 ```
